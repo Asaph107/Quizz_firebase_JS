@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="logo"> 
+
+        <div class="contact-aide">
+            <a class="aide" href="index2.html"> Aide </a>
+            <a class="contactez-nous" href="index3.html"> Contactez-nous</a>
+        </div>
+
+        <img src="logo.png" alt="" width="130">
+        
+    </div>
+
+    <div id="alertcontainer" hidden >
+        <div class="alert">
+            <h3>Impossible de se connecter avec les informations d'identification fornie.</h3>
+            <p class="supprimer" onclick="fermer()">ok</p>
+        </div>
+
+           
+        
+      
+    </div>
+
+    <h1>Bienvenue sur le site des prépas des examens.</h1>
+    <p class="info">Contenu public.</p>
+
+    <div class="cont-btns">
+        <button class="btn-inscription">S'inscrire</button>
+        <button class="btn-connection">Se connecter</button>
+        <button id="btn-deco" hidden  onclick="af()">Se déconnectrer</button>
+    </div>
+
+   
+
+    <form class="form-inscription">
+
+        <h2>Inscription</h2>
+        <label for="emailInscription"> Entrez votre email</label>
+        <input type="email" class="email-inscription" id="emailInscription">
+
+        <label for="mdpInscription"> Entrez votre mot de passe</label>
+        <input type="password" class="mdp-inscription" id="mdpInscription">
+
+        <button type="submit">S'inscrire</button>
+    </form>
+
+
+    <form class="form-connection">
+
+        <h2>Connexion</h2>
+        <p id="mauvais" hidden> mauvaises informations</p>
+        <label for="emailConnection"> Entrez votre email</label>
+        <input type="email" class="email-connection" id="emailConnection">
+
+        <label for="mdpConnection"> Entrez votre mot de passe </label>
+        <input type="password" class="mdp-connection" id="mdpConnection">
+
+        <button type="submit">Se Connecter</button>
+    </form>
+
+    <div class="container">
+     
+    </div>
+    <div id="faux"></div>
+
+
+
+    <!-- <ul id="examens">
+        <li id="p1"><a href="index1.html"> Quizz Culture générale</a></li>
+        <li id="p2"><a href="index1.html"> Quizz Mathematique</a></li>
+    </ul>  -->
+
+    <div id="jours" hidden>
+
+        <select name="jour" id="jour" onchange="document.location.href = this.value;">
+            <option value="indexQz.html"> selectionnez un Quizz </option>
+            <option value="indexQz.html"> histoire </option>
+            <option value="math.html">mathématique</option>
+            <option value="indexQz.html">français</option>
+            </select>
+
+    </div>
+   
+
+
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+        
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 	"https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js"
+
+        import { getFirestore} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore.js"
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCQxeO_Y0j8FJfzmRkpGojRFwX-tHA1034",
+          authDomain: "authentification-js-e7082.firebaseapp.com",
+          projectId: "authentification-js-e7082",
+          storageBucket: "authentification-js-e7082.appspot.com",
+          messagingSenderId: "447322351851",
+          appId: "1:447322351851:web:4066acdb145d1d8ac2b6ae"
+        };
+      
+        //Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth();
+        const db = getFirestore();
+        
+
+        
+        console.log(app);
+        console.log(app);
+
+
+
+
+btnConnection.addEventListener('click', () => {
+
+    if(formInscription.classList.contains('apparition')){
+        formInscription.classList.remove('apparition');
+    }
+    formConnection.classList.toggle('apparition');
+
+})
+
+formInscription.addEventListener('submit', (e) =>{
+    e.preventDefault();
+
+    const mailValeur = emailInscription.value;
+    const mdpInscriptionValeur = mdpInscription.value;
+
+    createUserWithEmailAndPassword(auth, mailValeur, mdpInscriptionValeur).
+       
+        then(cred => {
+            console.log(cred);
+            formInscription.reset();
+            formInscription.classList.toggle('apparition');
+        })
+    
+        })
+
+
+                 /////////////////////////////         DECONNECTION                ///////////////////////////
+    
+              deco.addEventListener('click', (e) => {
+               
+                e.preventDefault();
+                auth.signOut().then(() => {
+                    console.log("Déconnecté");
+                    
+                    
+                  
+                })
+               
+              })   
+
+
+
+              ////////////////////////////////          CONNECTION                //////////////////////////
+
+
+              formConnection.addEventListener('submit', (e) =>{
+                e.preventDefault();
+    const mailValeur = emailConnection.value;
+    const mdpConnectionValeur = mdpConnection.value;
+
+    
+    signInWithEmailAndPassword( auth, mailValeur, mdpConnectionValeur)
+    .then(cred => {
+            console.log("Connexion !!!!!", cred.user);
+            formConnection.reset();
+            formConnection.classList.toggle('apparition');
+            // document.getElementById("faux").innerHTML = ``;
+            fermer();
+        })
+
+        .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    ouvrir();
+    
+
+              });
+        
+    
+        })
+
+////////////////////////////////////////         Gestion du contenu pour les liens    ////////////////////////////////////////////
+
+
+const h1 = document.querySelector('h1');
+const info = document.querySelector('.info');
+
+onAuthStateChanged(auth, utilisateur => {
+    if (utilisateur) {
+        info.innerText = "apprendre c'est la vie !"
+        h1.innerText = "Veillez selectionner un Quizz"
+        ouvrirs();
+
+
+        var examens = document.getElementById("examens").style.display = "block";
+
+        const liens = document.querySelectorAll("a");
+        const liensArray =  Array.from(liens);
+
+         liensArray.map(lien => lien.addEventListener
+         ("click", function(event){
+
+            event.preventDefault();
+            location.href = "indexQz.html";
+             }))
+      
+        var element = document.getElementById("demoA");
+        console.log(element);
+    } else {
+            console.log("Utilisateur s'est déconnecté");
+            info.innerText = "Vous etes sur le contenu public. ";
+            h1.innerText = "Bienvenu sur le site de préparation d'examen";
+            var examens = document.getElementById("examens").style.display = "none";
+            
+            /////////////////   liaisons des pages  ///////////
+         
+    }
+});
+
+      </script>
+    <script src="app.js"></script>
+    
+</body>
+
+</html>

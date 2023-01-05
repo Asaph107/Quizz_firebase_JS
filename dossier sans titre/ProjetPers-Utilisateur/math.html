@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz math</title>
+    <link rel="stylesheet" href="math.css">
+    <link rel="stylesheet" href="styleQz.css">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+</head>
+    
+  <h1>Quizz Mathematique !</h1>
+
+  <div class="container-global">
+
+    <form class="form-quizz">
+
+          <div class="question-block">
+            <h4>Quelle est la regle qui verifie la suite suivant : 3,10,17,24 ? </h4>
+            
+            <div>
+                <input type="radio" id="mauvais1" name="q1" value="a"checked>
+                <label for="mauvais1">a - 10</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="bon" name="q1" value="b">
+                <label for="bon">a + 7</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="mauvais2" name="q1" value="c">
+                <label for="mauvais2">a + log(9)</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <h4>Quelle est le resultat du developpement suivant : (a+b)² ?</h4>
+            <div>
+                <input type="radio" id="mauvais1" name="q2" value="a" checked>
+                <label for="mauvais1">a² + 2ab² + b²</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="mauvais2" name="q2" value="b">
+                <label for="mauvais2">a² + b²</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="bon" name="q2" value="c">
+                <label for="bon">a² + 2ab + b²</label>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <h4>A quoi corespond cette affirmation : e ^(log m) ?</h4>
+            <div>
+                <input type="radio" id="mauvais1" name="q3" value="a" checked>
+                <label for="mauvais1">e^m</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="bon" name="q3" value="b">
+                <label for="bon">m</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="mauvais2" name="q3" value="c">
+                <label for="mauvais2">log e</label>
+            </div>
+        </div>
+
+
+        <div class="question-block">
+            <h4>Quelle est la reponse à l'équation: x² - 9 =0 ?</h4>
+
+            <div>
+                <input type="radio" id="bon" name="q4" value="a" checked>
+                <label for="bon">3</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="mauvais1" name="q4" value="b">
+                <label for="mauvais1">9</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="mauvais2" name="q4" value="c">
+                <label for="mauvais2">9/2</label>
+            </div>
+        </div>
+
+
+        <div class="question-block">
+            <h4>A quoi corespond l'expression suivante: x + 2 ( x + y ) ?.</h4>
+            <div>
+                <input type="radio" id="mauvais1" name="q5" value="a"
+                    checked>
+                <label for="mauvais1">x² + y²</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="mauvais2" name="q5" value="b">
+                <label for="mauvais2">3x + y</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="bon" name="q5" value="c">
+                <label for="bon">3x + 2y</label>
+            </div>
+        </div>
+
+        <button type="submit">Validez vos choix !</button>
+    </form>
+
+    <div class="resultats">
+      <h2>Cliquez sur valider pour voir les résultats.</h2>
+      <p class="aide"></p>
+      <p class="note"></p>
+    </div>
+  </div>
+
+  <div class="retour-containe">
+    <a class="retour" href="index.html"> retour </a>
+</div>
+        
+
+
+    <script src="matVerif.js"></script>
+</body>
+</html>
